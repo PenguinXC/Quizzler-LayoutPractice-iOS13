@@ -27,12 +27,30 @@ struct QuizzBrain {
     
     var questionNumber = 0
     
-    func checkAnswer(_ userAnswer: String) {
+    func checkAnswer(_ userAnswer: String) -> Bool {
         if userAnswer == quiz[questionNumber].answer {
-            sender.backgroundColor = UIColor.green
+            return true
+            
         } else {
-            sender.backgroundColor = UIColor.red
+            return false
         }
         
+    }
+    
+    func getQuestionText() -> String {
+        return quiz[questionNumber].text
+    }
+    
+    func getProgress() -> Float {
+        let progress = Float(questionNumber + 1) / Float(quiz.count)
+        return progress
+    }
+    
+    func nextQuestion() {
+        if questionNumber + 1 < quiz.count {
+            questionNumber += 1
+        } else {
+            questionNumber = 0
+        }
     }
 }
